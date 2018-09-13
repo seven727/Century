@@ -231,10 +231,12 @@
             if (typeid(*data) == typeid(D1)) 
             {
               ...
-            } else if (typeid(*data) == typeid(D2)) 
+            } 
+            else if (typeid(*data) == typeid(D2)) 
             {
               ...
-            } else if (typeid(*data) == typeid(D3)) 
+            } 
+            else if (typeid(*data) == typeid(D3)) 
             {
             ...
             

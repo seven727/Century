@@ -81,7 +81,8 @@ C/C++ 中的函数参数或者是函数的输入, 或者是函数的输出, 或�
 
 .. code-block:: c++
 
-    class MyClass {
+    class MyClass 
+    {
         public:
         void Analyze(const string& text);
         void Analyze(const char* text, size_t textlen);
