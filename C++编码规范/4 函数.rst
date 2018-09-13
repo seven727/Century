@@ -38,7 +38,7 @@ C/C++ 中的函数参数或者是函数的输入, 或者是函数的输出, 或�
 
 **定义**
 
-在 C 语言中, 如果函数需要修改变量的值, 参数必须为指针, 如 ``int Foo(int *pval)``. 在 C++ 中, 函数还可以声明为引用参数: ``int Foo(int &val)``.
+在 C 语言中, 如果函数需要修改变量的值, 参数必须为指针, 如 ``int Foo(int* pval)``. 在 C++ 中, 函数还可以声明为引用参数: ``int Foo(int& val)``.
 
 **优点**
 
@@ -54,7 +54,7 @@ C/C++ 中的函数参数或者是函数的输入, 或者是函数的输出, 或�
 
 .. code-block:: c++
 
-    void Foo(const string &in, string *out);
+    void Foo(const string& in, string* out);
 
 事实上这在 Google Code 是一个硬性约定: 输入参数是值参或 ``const`` 引用, 输出参数为指针. 输入参数可以是 ``const`` 指针, 但决不能是非 ``const`` 的引用参数, 除非特殊要求, 比如 ``swap()``.
 
@@ -83,8 +83,8 @@ C/C++ 中的函数参数或者是函数的输入, 或者是函数的输出, 或�
 
     class MyClass {
         public:
-        void Analyze(const string &text);
-        void Analyze(const char *text, size_t textlen);
+        void Analyze(const string& text);
+        void Analyze(const char* text, size_t textlen);
     };
 
 **优点**

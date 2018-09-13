@@ -10,7 +10,7 @@
 
 定义:
 
-    在 C 语言中, 如果函数需要修改变量的值, 参数必须为指针, 如 ``int foo(int *pval)``. 在 C++ 中, 函数还可以声明引用参数: ``int foo(int &val)``.
+    在 C 语言中, 如果函数需要修改变量的值, 参数必须为指针, 如 ``int foo(int* pval)``. 在 C++ 中, 函数还可以声明引用参数: ``int foo(int& val)``.
 
 优点:
 
@@ -26,7 +26,7 @@
 
         .. code-block:: c++
 
-            void Foo(const string &in, string *out);
+            void Foo(const string& in, string* out);
 
     事实上这在 Google Code 是一个硬性约定: 输入参数是值参或 ``const`` 引用, 输出参数为指针. 输入参数可以是 ``const`` 指针, 但决不能是非 ``const`` 的引用参数，除非用于交换，比如 ``swap()``.
 
@@ -50,10 +50,11 @@
 
         .. code-block:: c++
 
-            class MyClass {
+            class MyClass 
+            {
                 public:
-                void Analyze(const string &text);
-                void Analyze(const char *text, size_t textlen);
+                void Analyze(const string& text);
+                void Analyze(const char* text, size_t textlen);
             };
 
 优点:
@@ -96,10 +97,10 @@
         .. code-block:: c++
 
             // 通过空 AlphaNum 以支持四个形参
-            string StrCat(const AlphaNum &a,
-                          const AlphaNum &b = gEmptyAlphaNum,
-                          const AlphaNum &c = gEmptyAlphaNum,
-                          const AlphaNum &d = gEmptyAlphaNum);
+            string StrCat(const AlphaNum& a,
+                          const AlphaNum& b = gEmptyAlphaNum,
+                          const AlphaNum& c = gEmptyAlphaNum,
+                          const AlphaNum& d = gEmptyAlphaNum);
 
 5.4. 变长数组和 alloca()
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -125,7 +126,7 @@
 
 .. tip::
 
-    我们允许合理的使用友元类及友元函数.(尽量少使用)
+    我们允许合理的使用友元类及友元函数(尽量少使用).
 
 通常友元应该定义在同一文件内, 避免代码读者跑到其它文件查找使用该私有成员的类. 经常用到友元的一个地方是将 ``FooBuilder`` 声明为 ``Foo`` 的友元, 以便 ``FooBuilder`` 正确构造 ``Foo`` 的内部状态, 而无需将该状态暴露出来. 某些情况下, 将一个单元测试类声明成待测类的友元会很方便.
 
@@ -138,7 +139,7 @@
 
 .. tip::
 
-    我们不使用 C++ 异常.
+    我们不推荐使用 C++ 异常.
 
 优点:
 
@@ -174,8 +175,6 @@
 
     对于 Windows 代码来说, 有个 :ref:`特例 <windows-code>`.
 
-(YuleFox 注: 对于异常处理, 显然不是短短几句话能够说清楚的, 以构造函数为例, 很多 C++ 书籍上都提到当构造失败时只有异常可以处理, Google 禁止使用异常这一点, 仅仅是为了自身的方便, 说大了, 无非是基于软件管理成本上, 实际使用中还是自己决定)
-
 .. _RTTI:
 
 5.7. 运行时类型识别
@@ -201,7 +200,8 @@
         .. code-block:: c++
 
             bool Base::Equal(Base* other) = 0;
-            bool Derived::Equal(Base* other) {
+            bool Derived::Equal(Base* other) 
+            {
               Derived* that = dynamic_cast<Derived*>(other);
               if (that == NULL)
                 return false;
@@ -228,11 +228,14 @@
 	
         .. code-block:: c++
         
-            if (typeid(*data) == typeid(D1)) {
+            if (typeid(*data) == typeid(D1)) 
+            {
               ...
-            } else if (typeid(*data) == typeid(D2)) {
+            } else if (typeid(*data) == typeid(D2)) 
+            {
               ...
-            } else if (typeid(*data) == typeid(D3)) {
+            } else if (typeid(*data) == typeid(D3)) 
+            {
             ...
             
 	一旦在类层级中加入新的子类, 像这样的代码往往会崩溃. 而且, 一旦某个子类的属性改变了, 你很难找到并修改所有受影响的代码块.
@@ -381,7 +384,7 @@
 
     有人喜欢 ``int const* foo`` 形式, 不喜欢 ``const int* foo``, 他们认为前者更一致因此可读性也更好: 遵循了 ``const`` 总位于其描述的对象之后的原则. 但是一致性原则不适用于此, "不要过度使用" 的声明可以取消大部分你原本想保持的一致性. 将 ``const`` 放在前面才更易读, 因为在自然语言中形容词 (``const``) 是在名词 (``int``) 之前.
 
-    这是说, 我们提倡但不强制 ``const`` 在前. 但要保持代码的一致性! (Yang.Y 注: 也就是不要在一些地方把 ``const`` 写在类型前面, 在其他地方又写在后面, 确定一种写法, 然后保持一致.)
+    这是说, 我们提倡但不强制 ``const`` 在前. 但要保持代码的一致性! 
 
 5.11. 整型
 ~~~~~~~~~~~~~~~~~~
@@ -524,7 +527,8 @@
 
     .. code-block:: c++
 
-        if (raw_size < sizeof(int)) {
+        if (raw_size < sizeof(int)) 
+        {
             LOG(ERROR) << "compressed record not big enough for count: " << raw_size;
             return false;
         }
@@ -597,5 +601,3 @@
 结论：
 
     ``auto`` 只能用在局部变量里用。别用在文件作用域变量，命名空间作用域变量和类数据成员里。永远别列表初始化 ``auto`` 变量。
-
-    ``auto`` 还可以和 C++11 特性「尾置返回类型（trailing return type）」一起用，不过后者只能用在 lambda 表达式里。

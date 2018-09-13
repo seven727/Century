@@ -10,11 +10,12 @@
 
 **总述**
 
-使用 ``//`` 或 ``/* */``, 统一就好.
+使用 ``//`` 或 ``/* */``, 统一.
 
 **说明**
 
-``//`` 或 ``/* */`` 都可以; 但 ``//`` *更* 常用. 要在如何注释及注释风格上确保统一.
+``//`` 		多使用在对函数实现进行说明
+``/* */`` 多使用在类、函数声明处对类和函数进行概要说明.
 
 7.2. 文件注释
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -52,14 +53,17 @@
 
 .. code-block:: c++
 
-    // Iterates over the contents of a GargantuanTable.
-    // Example:
-    //    GargantuanTableIterator* iter = table->NewIterator();
-    //    for (iter->Seek("foo"); !iter->done(); iter->Next()) {
-    //      process(iter->key(), iter->value());
-    //    }
-    //    delete iter;
-    class GargantuanTableIterator {
+    /* Iterates over the contents of a GargantuanTable.
+    *  Example:
+    *    GargantuanTableIterator* iter = table->NewIterator();
+    *    for (iter->Seek("foo"); !iter->done(); iter->Next()) 
+    *    {
+    *      process(iter->key(), iter->value());
+    *    }
+    *    delete iter;  
+    */
+    class GargantuanTableIterator 
+    {
       ...
     };
 
@@ -103,20 +107,21 @@
 
 .. code-block:: c++
 
-    // Returns an iterator for this table.  It is the client's
-    // responsibility to delete the iterator when it is done with it,
-    // and it must not use the iterator once the GargantuanTable object
-    // on which the iterator was created has been deleted.
-    //
-    // The iterator is initially positioned at the beginning of the table.
-    //
-    // This method is equivalent to:
-    //    Iterator* iter = table->NewIterator();
-    //    iter->Seek("");
-    //    return iter;
-    // If you are going to immediately seek to another place in the
-    // returned iterator, it will be faster to use NewIterator()
-    // and avoid the extra seek.
+    /* Returns an iterator for this table.  It is the client's
+    *  responsibility to delete the iterator when it is done with it,
+    *  and it must not use the iterator once the GargantuanTable object
+    *  on which the iterator was created has been deleted.
+    * 
+    *  The iterator is initially positioned at the beginning of the table.
+    * 
+    *  This method is equivalent to:
+    *    Iterator* iter = table->NewIterator();
+    *    iter->Seek("");
+    *    return iter;
+    * If you are going to immediately seek to another place in the
+    * returned iterator, it will be faster to use NewIterator()
+    * and avoid the extra seek.
+    */
     Iterator* GetIterator() const;
 
 但也要避免罗罗嗦嗦, 或者对显而易见的内容进行说明. 下面的注释就没有必要加上 "否则返回 false", 因为已经暗含其中了:
@@ -189,7 +194,8 @@
 
     // Divide result by two, taking into acppount that x
     // contains the carry from the add.
-    for (int i = 0; i < result->size(); i++) {
+    for (int i = 0; i < result->size(); i++) 
+    {
       x = (x << 8) + (*result)[i];
       (*result)[i] = x >> 1;
       x &= 1;
@@ -273,7 +279,8 @@
 
     // Find the element in the vector.  <-- 差: 这太明显了!
     auto iter = std::find(v.begin(), v.end(), element);
-    if (iter != v.end()) {
+    if (iter != v.end()) 
+    {
       Process(element);
     }
 
@@ -283,7 +290,8 @@
 
     // Process "element" unless it was already processed.
     auto iter = std::find(v.begin(), v.end(), element);
-    if (iter != v.end()) {
+    if (iter != v.end()) 
+    {
       Process(element);
     }
 
@@ -291,7 +299,8 @@
 
 .. code-block:: c++
 
-    if (!IsAlreadyProcessed(element)) {
+    if (!IsAlreadyProcessed(element)) 
+    {
       Process(element);
     }
 

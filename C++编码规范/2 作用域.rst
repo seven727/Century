@@ -24,8 +24,10 @@
 
     .. code-block:: c++
 
-        namespace X {
-        inline namespace Y {
+        namespace X 
+        {       
+        inline namespace Y 
+        {
         void foo();
         }  // namespace Y
         }  // namespace X
@@ -55,11 +57,12 @@
         .. code-block:: c++
 
             // .h 文件
-            namespace mynamespace {
-
+            namespace mynamespace 
+            {
             // 所有声明都置于命名空间中
             // 注意不要使用缩进
-            class MyClass {
+            class MyClass 
+            {
                 public:
                 ...
                 void Foo();
@@ -70,10 +73,12 @@
         .. code-block:: c++
 
             // .cpp 文件
-            namespace mynamespace {
+            namespace mynamespace 
+            {
 
             // 函数定义都置于命名空间中
-            void MyClass::Foo() {
+            void MyClass::Foo() 
+            {
                 ...
             }
 
@@ -87,7 +92,8 @@
 
             DEFINE_FLAG(bool, someflag, false, "dummy flag");
 
-            namespace a {
+            namespace a 
+            {
 
             ...code for a...                // 左对齐
 
@@ -112,12 +118,15 @@
         .. code-block:: c++
 
             // 在 .h 中使用别名缩短常用的命名空间
-            namespace librarian {
-            namespace impl {  // 仅限内部使用
+            namespace librarian 
+            {
+            namespace impl 
+            {  // 仅限内部使用
             namespace sidetable = ::pipeline_diagnostics::sidetable;
             }  // namespace impl
 
-            inline void my_inline_function() {
+            inline void my_inline_function() 
+            {
               // 限制在一个函数中的命名空间别名
               namespace baz = ::foo::bar::baz;
               ...
@@ -147,7 +156,8 @@
 
     .. code-block:: c++
 
-        namespace {
+        namespace 
+        {
         ...
         }  // namespace
 
@@ -174,8 +184,10 @@
 
     .. code-block:: c++
 
-        namespace myproject {
-        namespace foo_bar {
+        namespace myproject 
+        {
+        namespace foo_bar 
+        {
         void Function1();
         void Function2();
         }  // namespace foo_bar
@@ -185,8 +197,10 @@
 
     .. code-block:: c++
 
-        namespace myproject {
-        class FooBar {
+        namespace myproject 
+        {
+        class FooBar 
+        {
          public:
           static void Function1();
           static void Function2();
@@ -232,7 +246,10 @@ C++ 允许在函数的任何位置声明变量. 我们提倡在尽可能小的�
 
     .. code-block:: c++
 
-        while (const char* p = strchr(str, '/')) str = p + 1;
+        while (const char* p = strchr(str, '/')) 
+        {
+        	str = p + 1;
+        }
 
 
 .. warning:: 有一个例外, 如果变量是一个对象, 每次进入作用域都要调用其构造函数, 每次退出作用域都要调用其析构函数. 这会导致效率降低.
@@ -240,7 +257,8 @@ C++ 允许在函数的任何位置声明变量. 我们提倡在尽可能小的�
 .. code-block:: c++
 
     // 低效的实现
-    for (int i = 0; i < 1000000; ++i) {
+    for (int i = 0; i < 1000000; ++i) 
+    {
         Foo f;                  // 构造函数和析构函数分别调用 1000000 次!
         f.DoSomething(i);
     }
@@ -250,7 +268,8 @@ C++ 允许在函数的任何位置声明变量. 我们提倡在尽可能小的�
 .. code-block:: c++
 
     Foo f;                      // 构造函数和析构函数只调用 1 次
-    for (int i = 0; i < 1000000; ++i) {
+    for (int i = 0; i < 1000000; ++i) 
+    {
         f.DoSomething(i);
     }
 

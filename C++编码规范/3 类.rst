@@ -34,7 +34,7 @@
 
 构造函数不允许调用虚函数. 如果代码允许, 直接终止程序是一个合适的处理错误的方式. 否则, 考虑用 ``Init()`` 方法或工厂函数.
 
-构造函数不得调用虚函数, 或尝试报告一个非致命错误. 如果对象需要进行有意义的 (non-trivial) 初始化, 考虑使用明确的 Init() 方法或使用工厂模式. Avoid ``Init()`` methods on objects with no other states that affect which public methods may be called (此类形式的半构造对象有时无法正确工作).
+构造函数不得调用虚函数, 或尝试报告一个非致命错误. 如果对象需要进行有意义的 (non-trivial) 初始化, 考虑使用明确的 Init() 方法或使用工厂模式. 
 
 .. _implicit-conversions:
 
@@ -55,7 +55,8 @@
 
 .. code-block:: c++
 
-    class Foo {
+    class Foo 
+    {
       explicit Foo(int x, double y);
       ...
     };
@@ -176,10 +177,6 @@
 
 只有当所有父类除第一个外都是 :ref:`纯接口类 <interface>` 时, 才允许使用多重继承. 为确保它们是纯接口, 这些类必须以 ``Interface`` 为后缀.
 
-**注意**
-
-关于该规则, Windows 下有个 :ref:`特例 <windows-code>`.
-
 .. _interface:
 
 3.6. 接口
@@ -213,7 +210,7 @@
 
 **结论**
 
-只有在满足上述条件时, 类才以 ``I`` 开始, 但反过来, 满足上述需要的类未必一定以 ``I`` 开始.
+只有在满足上述条件时, 才称之为接口类.
 
 3.7. 运算符重载
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -273,7 +270,7 @@ C++ 允许用户通过使用 ``operator`` 关键字 `对内建运算符进行重
 
 **总述**
 
-将 *所有* 数据成员声明为 ``private``, 除非是 ``static const`` 类型成员 (遵循 :ref:`常量命名规则 <constant-names>`). 处于技术上的原因, 在使用 `Google Test <https://github.com/google/googletest>`_ 时我们允许测试固件类中的数据成员为 ``protected``.
+将 *所有* 数据成员声明为 ``private``, 除非是 ``static const`` 类型成员 (遵循 :ref:`常量命名规则 <constant-names>`).
 
 .. _declaration-order:
 

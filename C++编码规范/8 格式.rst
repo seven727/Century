@@ -78,7 +78,7 @@
 .. code-block:: c++
 
     ReturnType ClassName::FunctionName(Type par_name1, Type par_name2) 
-   	{
+    {
       DoSomething();
       ...
     }
@@ -288,8 +288,8 @@
 
 .. code-block:: c++
 
-		if (x == kBar) return new Bar();	// 差
-    if (x == kFoo) 										// 好				
+    if (x == kBar) return new Bar();  // 差
+    if (x == kFoo)                    // 好				
     {
     	return new Foo();
     }
@@ -394,7 +394,8 @@
 
     if (this_one_thing > this_other_thing
         && a_third_thing == a_fourth_thing
-        && yet_another && last_one) {
+        && yet_another && last_one) 
+    {
       ...
     }
 
@@ -415,8 +416,8 @@
 
     return result;                  // 返回值很简单, 没有圆括号.
     // 可以用圆括号把复杂表达式圈起来, 改善可读性.
-    return (some_long_condition &&
-            another_condition);
+    return (some_long_condition
+            && another_condition);
 
 .. code-block:: c++
 
@@ -510,7 +511,7 @@
     {
      public:      // 注意有一个空格的缩进
       MyClass();  // 标准的两空格缩进
-      explicit MyClass(int var);
+      explicit MyClass(int nVar);
       virturl ~MyClass();
 
       void SomeFunction();
@@ -518,14 +519,14 @@
       {
       }
 
-      void set_some_var(int var);
-      int some_var() const;
+      void SetSomeVar(int nVar);
+      int SomeVar() const;
 
      private:
-      bool SomeInternalFunction();
+      bool IsSomeInternalFunction();
 
-      int some_var_;
-      int some_other_var_;
+      int m_nSomeVar;
+      int m_nSomeOtherVar;
     };
 
 注意事项:
@@ -556,24 +557,24 @@
 .. code-block:: c++
 
     // 如果所有变量能放在同一行:
-    MyClass::MyClass(int var) : some_var_(var) 
+    MyClass::MyClass(int nVar) : m_nSomeVar(nVar) 
     {
       DoSomething();
     }
 
     // 如果不能放在同一行,
     // 必须置于冒号后, 并缩进 4 个空格
-    MyClass::MyClass(int var)
-        : some_var_(var), some_other_var_(var + 1) 
+    MyClass::MyClass(int nVar)
+        : m_nSomeVar(nVar), m_nSomeOtherVar_(nVar + 1) 
     {
       DoSomething();
     }
 
     // 如果初始化列表需要置于多行, 将每一个成员放在单独的一行
     // 并逐行对齐
-    MyClass::MyClass(int var)
-        : some_var_(var),             // 4 space indent
-          some_other_var_(var + 1) 
+    MyClass::MyClass(int nVar)
+        : m_nSomeVar(nVar),             // 4 space indent
+          m_nSomeOtherVar_(nVar + 1) 
     {
       DoSomething();
     }
@@ -591,9 +592,11 @@
 
 .. code-block:: c++
 
-    namespace {
+    namespace 
+    {
 
-    void foo() {  // 正确. 命名空间内没有额外的缩进.
+    void foo() // 正确. 命名空间内没有额外的缩进.      
+    {  
       ...
     }
 
@@ -603,10 +606,12 @@
 
 .. code-block:: c++
 
-    namespace {
+    namespace 
+    {
 
       // 错, 缩进多余了.
-      void foo() {
+      void foo() 
+      {
         ...
       }
 
@@ -648,6 +653,7 @@
       // 然后是函数实现
       Foo(int b) : Bar(), baz_(b) {}  // 大括号里面是空的话, 不加空格.
       ...
+    }
 
 添加冗余的留白会给其他人编辑时造成额外负担. 因此, 行尾不要留空格. 如果确定一行代码已经修改完毕, 将多余的空格去掉; 或者在专门清理空格时去掉（尤其是在没有其他人在处理这件事的时候).
 
@@ -692,12 +698,4 @@
 
 **说明**
 
-这不仅仅是规则而是原则问题了: 不在万不得已, 不要使用空行. 尤其是: 两个函数定义之间的空行不要超过 2 行, 函数体首尾不要留空行, 函数体中也不要随意添加空行.
-
-基本原则是: 同一屏可以显示的代码越多, 越容易理解程序的控制流. 当然, 过于密集的代码块和过于疏松的代码块同样难看, 这取决于你的判断. 但通常是垂直留白越少越好.
-
-下面的规则可以让加入的空行更有效:
-
-- 函数体内开头或结尾的空行可读性微乎其微.
-
-- 在多重 if-else 块里加空行或许有点可读性.
+不允许随意的留白，例如两个函数定义之间的空行超过 1 行, 函数体首尾不要留空行, 任意处留白不得超过1行. 但是为了代码美观，在代码行较多的函数中，可以在两块相对独立的逻辑间用空行进行隔离。
